@@ -81,13 +81,13 @@ class HighscoreListScreen:
 
             if char.isalpha():
                 if char.isupper():
-                    path: str = alphas_path + char + "_upper.xpm"
+                    path: str = alphas_path + char + "_upper.png"
                 else:
-                    path = alphas_path + char + "_lower.xpm"
+                    path = alphas_path + char + "_lower.png"
             else:
-                path = digits_path + char + ".xpm"
+                path = digits_path + char + ".png"
 
-            char_ptr, _, _ = self.mlx_obj.mlx_xpm_file_to_image(
+            char_ptr, _, _ = self.mlx_obj.mlx_png_file_to_image(
                 self.init_ptr, path
             )
 
@@ -100,14 +100,14 @@ class HighscoreListScreen:
                         "High_scoore_list_screen.py",
                         "HighscoreListScreen",
                         "load_all_imgs()",
-                        f"{char}.xpm not found",
+                        f"{char}.png not found",
                     )
                 )
 
             images_n_p[char] = char_ptr
 
-        bkgrd_ptr, _, _ = self.mlx_obj.mlx_xpm_file_to_image(
-            self.init_ptr, background_path + "high_score_img.xpm"
+        bkgrd_ptr, _, _ = self.mlx_obj.mlx_png_file_to_image(
+            self.init_ptr, background_path + "high_score_img.png"
         )
 
         if not bkgrd_ptr:
@@ -119,7 +119,7 @@ class HighscoreListScreen:
                     "High_scoore_list_screen.py",
                     "HighscoreListScreen",
                     "load_all_imgs()",
-                    "high_score_img.xpm not found",
+                    "high_score_img.png not found",
                 )
             )
 
@@ -160,7 +160,7 @@ class HighscoreListScreen:
             self.mlx_obj.mlx_put_image_to_window(
                 self.init_ptr, self.win_ptr, self.images[c], x, y
             )
-            x += 90
+            x += 40
 
     def show_highscores_screen(self) -> None:
         """Create and show the Highscore List screen.
@@ -201,9 +201,9 @@ class HighscoreListScreen:
         rng: int = min(len(names), 10)
 
         for i in range(rng):
-            self.put_word_in_place(1230, 580 + (120 * i), names[i])
+            self.put_word_in_place(600, 290 + (63 * i), names[i])
             self.put_word_in_place(
-                2250, 580 + (120 * i), self.fix_score(scores[i])
+                1130, 290 + (63 * i), self.fix_score(scores[i])
             )
 
         self.mlx_obj.mlx_loop(self.init_ptr)
