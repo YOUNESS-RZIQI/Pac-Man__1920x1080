@@ -1,0 +1,1 @@
+# Evidence Directory\nThis directory contains summaries of the technical evidence (Git history, repository structure) that support the project management documentation.\n

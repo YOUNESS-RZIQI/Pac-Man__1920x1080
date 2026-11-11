@@ -1,0 +1,7 @@
+.venv
+__pychash__
+__pychash__/
+build
+dist
+src/__pychash__
+.python-version
