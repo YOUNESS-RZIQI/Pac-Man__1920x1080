@@ -7,7 +7,7 @@ from typing import Dict, List, Tuple
 
 from PIL import Image, ImageColor
 
-TARGET_SIZE: Tuple[int, int] = (620, 125)
+TARGET_SIZE: Tuple[int, int] = (60, 60)
 RGBA = Tuple[int, int, int, int]
 
 
@@ -83,7 +83,7 @@ def convert_xpm_to_png(xpm_path: Path, png_path: Path,
 
 
 def convert_directory(directory: Path, recursive: bool = False,
-                      extension: str = ".xpm1") -> None:
+                      extension: str = ".xpm12") -> None:
     """Convert all the XPM files of a directory that have no .png yet.
 
     Args:

@@ -69,11 +69,7 @@ class MainMenuScreen:
                 )
             )
 
-        size_ptr, self.SCREEN_WIDTH, self.SCREEN_HEIGHT = (
-            self.mlx_obj.mlx_get_screen_size(self.init_ptr)
-        )
-        if size_ptr != 0:
-            self.SCREEN_WIDTH, self.SCREEN_HEIGHT = (3840, 2160)
+        self.SCREEN_WIDTH, self.SCREEN_HEIGHT = (1920, 1080)
         FileTools.check_pc_resolution(self.SCREEN_WIDTH, self.SCREEN_HEIGHT)
 
         self.win_ptr: Any = self.mlx_obj.mlx_new_window(
@@ -97,11 +93,12 @@ class MainMenuScreen:
         self.intsr_show_count: int = 0
         self.exit_show_count: int = 0
 
-        self.mmc_width_x_x: Tuple[int, int] = (1316, 2521)
-        self.str_g_button_y_y: Tuple[int, int] = (550, 862)
-        self.vw_scor_button_y_y: Tuple[int, int] = (863, 1183)
-        self.istrc_button_y_y: Tuple[int, int] = (1184, 1513)
-        self.exit_button_y_y: Tuple[int, int] = (1514, 1745)
+        # here
+        self.mmc_width_x_x: Tuple[int, int] = (671, 2521)
+        self.str_g_button_y_y: Tuple[int, int] = (307, 862)
+        self.vw_scor_button_y_y: Tuple[int, int] = (472, 1183)
+        self.istrc_button_y_y: Tuple[int, int] = (651, 1513)
+        self.exit_button_y_y: Tuple[int, int] = (808, 1745)
 
         self.chosen_screen: int = E_MainMenuOptions.EXIT
 
@@ -122,12 +119,12 @@ class MainMenuScreen:
             "Main_menu" + os.sep
 
         img_files: Dict[str, str] = {
-            "main_menu": "main_menu.xpm",
-            "start_game_button": "start_game_button.xpm",
-            "view_highscores_button": "view_highscores_button.xpm",
-            "instructions_button": "instructions_button.xpm",
-            "exit_button": "exit_button.xpm",
-            "hand_cursor": "hand_cursor.xpm"
+            "main_menu": "main_menu.png",
+            "start_game_button": "start_game_button.png",
+            "view_highscores_button": "view_highscores_button.png",
+            "instructions_button": "instructions_button.png",
+            "exit_button": "exit_button.png",
+            "hand_cursor": "hand_cursor.png"
         }
 
         images: Dict[str, Any] = {}
@@ -135,7 +132,7 @@ class MainMenuScreen:
         for name, filename in img_files.items():
             path: str = base_path + filename
 
-            img, _, _ = self.mlx_obj.mlx_xpm_file_to_image(self.init_ptr, path)
+            img, _, _ = self.mlx_obj.mlx_png_file_to_image(self.init_ptr, path)
 
             if not img:
                 for destroy_ptr in images.values():
@@ -204,7 +201,7 @@ class MainMenuScreen:
                         self.init_ptr,
                         self.win_ptr,
                         self.images["start_game_button"],
-                        self.mmc_width_x_x[0],
+                        self.mmc_width_x_x[0] - 22,
                         self.str_g_button_y_y[0],
                     )
                     self.start_game_show_count = 0
@@ -225,7 +222,7 @@ class MainMenuScreen:
                         self.init_ptr,
                         self.win_ptr,
                         self.images["view_highscores_button"],
-                        self.mmc_width_x_x[0] - 30,
+                        self.mmc_width_x_x[0] - 25,
                         self.vw_scor_button_y_y[0],
                     )
                     self.hiscors_show_count = 0
@@ -246,7 +243,7 @@ class MainMenuScreen:
                         self.init_ptr,
                         self.win_ptr,
                         self.images["instructions_button"],
-                        self.mmc_width_x_x[0] - 10,
+                        self.mmc_width_x_x[0] - 20,
                         self.istrc_button_y_y[0],
                     )
                     self.intsr_show_count = 0
@@ -285,7 +282,7 @@ class MainMenuScreen:
                     self.init_ptr,
                     self.win_ptr,
                     self.images["start_game_button"],
-                    self.mmc_width_x_x[0],
+                    self.mmc_width_x_x[0] - 22,
                     self.str_g_button_y_y[0],
                 )
 
@@ -293,7 +290,7 @@ class MainMenuScreen:
                     self.init_ptr,
                     self.win_ptr,
                     self.images["view_highscores_button"],
-                    self.mmc_width_x_x[0] - 30,
+                    self.mmc_width_x_x[0] - 25,
                     self.vw_scor_button_y_y[0],
                 )
 
@@ -301,7 +298,7 @@ class MainMenuScreen:
                     self.init_ptr,
                     self.win_ptr,
                     self.images["instructions_button"],
-                    self.mmc_width_x_x[0] - 10,
+                    self.mmc_width_x_x[0] - 20,
                     self.istrc_button_y_y[0],
                 )
 
@@ -317,7 +314,7 @@ class MainMenuScreen:
                 self.intsr_show_count = 0
                 self.hiscors_show_count = 0
 
-        def animation_loop(self: MainMenuScreen) -> None:
+        def curser_animation_loop(self: MainMenuScreen) -> None:
             """Update the displayed image and the hand cursor.
 
             If an error happens, it is saved and the loop is stopped.
@@ -363,6 +360,9 @@ class MainMenuScreen:
                 y: The y position of the click.
                 self: The MainMenuScreen instance.
             """
+
+            print(x, y)
+            return
 
             if button == 1 and X_Y_Tools.is_click_in_button(
                 x, y, self.mmc_width_x_x, self.str_g_button_y_y
@@ -429,7 +429,7 @@ class MainMenuScreen:
         self.mlx_obj.mlx_hook(self.win_ptr, 33, 0, exit_loop, self)
 
         self.mlx_obj.mlx_mouse_hook(self.win_ptr, click, self)
-        self.mlx_obj.mlx_loop_hook(self.init_ptr, animation_loop, self)
+        self.mlx_obj.mlx_loop_hook(self.init_ptr, curser_animation_loop, self)
 
         self.mlx_obj.mlx_loop(self.init_ptr)
 
@@ -450,3 +450,6 @@ class MainMenuScreen:
             )
 
         return self.chosen_screen
+
+
+MainMenuScreen().show_main_menu_screen()
