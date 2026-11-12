@@ -29,17 +29,13 @@ class InstructionsScreen:
                 )
             )
 
-        size_ptr, self.SCREEN_WIDTH, self.SCREEN_HEIGHT = (
-            self.mlx_obj.mlx_get_screen_size(self.init_ptr)
-        )
-        if size_ptr != 0:
-            self.SCREEN_WIDTH, self.SCREEN_HEIGHT = (3840, 2160)
+        self.SCREEN_WIDTH, self.SCREEN_HEIGHT = (1920, 1080)
         FileTools.check_pc_resolution(self.SCREEN_WIDTH, self.SCREEN_HEIGHT)
 
         base_path: str = PacManFilesTools.get_base_path_for_images() + os.sep\
-            + "Instructions" + os.sep + "instructions_img.xpm"
+            + "Instructions" + os.sep + "instructions_img.png"
 
-        self.instr_img_ptr, _, _ = self.mlx_obj.mlx_xpm_file_to_image(
+        self.instr_img_ptr, _, _ = self.mlx_obj.mlx_png_file_to_image(
             self.init_ptr, base_path
         )
         if not self.instr_img_ptr:
@@ -49,7 +45,7 @@ class InstructionsScreen:
                     "Instructions_screen.py",
                     "InstructionsScreen",
                     "__init__()",
-                    "instructions_img.xpm failed",
+                    "instructions_img.png failed",
                 )
             )
 
