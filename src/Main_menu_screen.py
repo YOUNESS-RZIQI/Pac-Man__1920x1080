@@ -93,12 +93,11 @@ class MainMenuScreen:
         self.intsr_show_count: int = 0
         self.exit_show_count: int = 0
 
-        # here
-        self.mmc_width_x_x: Tuple[int, int] = (671, 2521)
-        self.str_g_button_y_y: Tuple[int, int] = (307, 862)
-        self.vw_scor_button_y_y: Tuple[int, int] = (472, 1183)
-        self.istrc_button_y_y: Tuple[int, int] = (651, 1513)
-        self.exit_button_y_y: Tuple[int, int] = (808, 1745)
+        self.mmc_width_x_x: Tuple[int, int] = (671, 1255)
+        self.str_g_button_y_y: Tuple[int, int] = (277, 444)
+        self.vw_scor_button_y_y: Tuple[int, int] = (445, 623)
+        self.istrc_button_y_y: Tuple[int, int] = (624, 783)
+        self.exit_button_y_y: Tuple[int, int] = (784, 926)
 
         self.chosen_screen: int = E_MainMenuOptions.EXIT
 
@@ -264,7 +263,7 @@ class MainMenuScreen:
                         self.init_ptr,
                         self.win_ptr,
                         self.images["exit_button"],
-                        self.mmc_width_x_x[0] - 8,
+                        self.mmc_width_x_x[0] - 25,
                         self.exit_button_y_y[0],
                     )
                     self.exit_show_count = 0
@@ -306,7 +305,7 @@ class MainMenuScreen:
                     self.init_ptr,
                     self.win_ptr,
                     self.images["exit_button"],
-                    self.mmc_width_x_x[0] - 8,
+                    self.mmc_width_x_x[0] - 25,
                     self.exit_button_y_y[0],
                 )
                 self.start_game_show_count = 0
@@ -360,9 +359,6 @@ class MainMenuScreen:
                 y: The y position of the click.
                 self: The MainMenuScreen instance.
             """
-
-            print(x, y)
-            return
 
             if button == 1 and X_Y_Tools.is_click_in_button(
                 x, y, self.mmc_width_x_x, self.str_g_button_y_y
@@ -450,6 +446,3 @@ class MainMenuScreen:
             )
 
         return self.chosen_screen
-
-
-MainMenuScreen().show_main_menu_screen()
