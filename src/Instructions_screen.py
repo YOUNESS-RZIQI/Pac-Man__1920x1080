@@ -68,7 +68,7 @@ class InstructionsScreen:
             )
 
         self.mlx_obj.mlx_put_image_to_window(
-            self.init_ptr, self.win_ptr, self.instr_img_ptr, 0, 0
+            self.init_ptr, self.win_ptr, self.instr_img_ptr, 0, -30
         )
 
     def show_instructions_screen(self) -> None:

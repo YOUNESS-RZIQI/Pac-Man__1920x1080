@@ -247,11 +247,11 @@ class FileTools:
             height: The screen height in pixels.
 
         Raises:
-            ValueError: If mlx_init(), mlx_xpm_file_to_image() or
+            ValueError: If mlx_init(), mlx_png_file_to_image() or
                 mlx_new_window() fails.
         """
 
-        if (width, height) == (3840, 2160):
+        if (width, height) == (1920, 1080):
             return
 
         mlx_obj: Mlx = Mlx()
@@ -266,12 +266,12 @@ class FileTools:
                 )
             )
 
-        SCREEN_WIDTH, SCREEN_HEIGHT = (1254, 1254)
+        SCREEN_WIDTH, SCREEN_HEIGHT = (800, 800)
 
         img_path: str = PacManFilesTools.get_base_path_for_images()\
-            + os.sep + "Error" + os.sep + "res_error_img.xpm"
+            + os.sep + "Error" + os.sep + "res_error_img.png"
 
-        error_img_ptr, _, _ = mlx_obj.mlx_xpm_file_to_image(
+        error_img_ptr, _, _ = mlx_obj.mlx_png_file_to_image(
             init_ptr, img_path
         )
         if not error_img_ptr:
@@ -281,7 +281,7 @@ class FileTools:
                     "Files_Tools.py",
                     "FileTools",
                     "resolution_error_window()",
-                    "res_error_img.xpm failed",
+                    "res_error_img.png failed",
                 )
             )
 

@@ -190,7 +190,7 @@ class HighscoreListScreen:
             self.mlx_obj.mlx_loop_exit(self.init_ptr)
 
         self.mlx_obj.mlx_put_image_to_window(
-            self.init_ptr, self.win_ptr, self.images["high_score_img"], 0, 0
+            self.init_ptr, self.win_ptr, self.images["high_score_img"], 0, -30
         )
 
         self.mlx_obj.mlx_key_hook(self.win_ptr, key_hook, self)
@@ -201,9 +201,9 @@ class HighscoreListScreen:
         rng: int = min(len(names), 10)
 
         for i in range(rng):
-            self.put_word_in_place(600, 290 + (63 * i), names[i])
+            self.put_word_in_place(600, 260 + (63 * i), names[i])
             self.put_word_in_place(
-                1130, 290 + (63 * i), self.fix_score(scores[i])
+                1140, 260 + (63 * i), self.fix_score(scores[i])
             )
 
         self.mlx_obj.mlx_loop(self.init_ptr)

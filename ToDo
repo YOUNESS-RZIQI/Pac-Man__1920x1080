@@ -4,9 +4,35 @@ Done:
 2) High scoore list screen file.
 3)Instructions_screen.py
 4)Main_menu_screen.py
-
+5) videos.py
 
 
 
 
 ToDo:
+
+Start_Game.py
+
+
+
+
+
+
+
+
+        #
+
+        def click(button: int, x: int, y: int, nun) -> None:
+            """Select the option whose button was clicked.
+
+            Only the left mouse button is handled.
+
+            Args:
+                button: The number of the mouse button.
+                x: The x position of the click.
+                y: The y position of the click.
+                self: The MainMenuScreen instance.
+            """
+            print(x, y)
+
+        self.mlx_obj.mlx_mouse_hook(self.win_ptr, click, self)

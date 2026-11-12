@@ -40,11 +40,7 @@ class VideoScreen:
                 )
             )
 
-        size_ptr, self.SCREEN_WIDTH, self.SCREEN_HEIGHT = (
-            self.mlx_obj.mlx_get_screen_size(self.init_ptr)
-        )
-        if size_ptr != 0:
-            self.SCREEN_WIDTH, self.SCREEN_HEIGHT = (3840, 2160)
+        self.SCREEN_WIDTH, self.SCREEN_HEIGHT = (1920, 1080)
         FileTools.check_pc_resolution(self.SCREEN_WIDTH, self.SCREEN_HEIGHT)
         FileTools.resolution_error_window(self.SCREEN_WIDTH,
                                           self.SCREEN_HEIGHT)
@@ -86,7 +82,7 @@ class VideoScreen:
             imgs.append(base_path + f"intro1{os.sep}frame_" + str(i) + ".png")
 
         imgs.append(base_path + "intro_background.png")
-        imgs.append(base_path + "black_wall.xpm")
+        imgs.append(base_path + "black_wall.png")
 
         for i in range(1, 281):
             imgs.append(base_path + f"intro2{os.sep}frame_" + str(i) + ".png")
@@ -117,15 +113,9 @@ class VideoScreen:
                     self.sounds_obj.play_or_stop_intro_sound("stop")
                     return
 
-                if ".png" in self.images_paths[self.index]:
-                    img_ptr, _, _ = self.mlx_obj.mlx_png_file_to_image(
-                        self.init_ptr, self.images_paths[self.index]
-                    )
-
-                else:
-                    img_ptr, _, _ = self.mlx_obj.mlx_xpm_file_to_image(
-                        self.init_ptr, self.images_paths[self.index]
-                    )
+                img_ptr, _, _ = self.mlx_obj.mlx_png_file_to_image(
+                    self.init_ptr, self.images_paths[self.index]
+                )
 
                 if not img_ptr:
                     raise ValueError("failed to create "
@@ -133,7 +123,7 @@ class VideoScreen:
 
                 if "/intro1/" in self.images_paths[self.index]:
                     self.mlx_obj.mlx_put_image_to_window(
-                        self.init_ptr, self.win_ptr, img_ptr, 1250, 540
+                        self.init_ptr, self.win_ptr, img_ptr, 656, 300
                     )
 
                 elif "/intro_background.png" in self.images_paths[self.index]:
@@ -141,19 +131,22 @@ class VideoScreen:
                         self.init_ptr, self.win_ptr, img_ptr, 0, 0
                     )
 
-                elif "/black_wall.xpm" in self.images_paths[self.index]:
+                elif "/black_wall.png" in self.images_paths[self.index]:
                     self.mlx_obj.mlx_put_image_to_window(
-                        self.init_ptr, self.win_ptr, img_ptr, 1050, 340
+                        self.init_ptr, self.win_ptr, img_ptr, 463, 250
                     )
 
                 elif "/intro2/" in self.images_paths[self.index]:
                     self.mlx_obj.mlx_put_image_to_window(
-                        self.init_ptr, self.win_ptr, img_ptr, 1105, 385
+                        self.init_ptr, self.win_ptr, img_ptr, 488, 275
                     )
 
                 self.mlx_obj.mlx_destroy_image(self.init_ptr, img_ptr)
                 img_ptr = None
-                time.sleep(1 / 100)
+
+                if "/intro2/" in self.images_paths[self.index]:
+                    time.sleep(1 / 12)
+
                 self.index += 1
             except Exception as e:
                 if img_ptr:
