@@ -79,11 +79,7 @@ class StartGameScreen:
                 )
             )
 
-        size_ptr, self.SCREEN_WIDTH, self.SCREEN_HEIGHT = (
-            self.mlx_obj.mlx_get_screen_size(self.init_ptr)
-        )
-        if size_ptr != 0:
-            self.SCREEN_WIDTH, self.SCREEN_HEIGHT = (3840, 2160)
+        self.SCREEN_WIDTH, self.SCREEN_HEIGHT = (1920, 1080)
         FileTools.check_pc_resolution(self.SCREEN_WIDTH, self.SCREEN_HEIGHT)
 
         self.win_ptr: Any = self.mlx_obj.mlx_new_window(
@@ -100,9 +96,9 @@ class StartGameScreen:
                 )
             )
 
-        self.CELL_SIZE: int = 90
+        self.CELL_SIZE: int = 45
         self.MAZE_ROWS, self.MAZE_COLMS = 13, 19
-        self.X_MAZE_ON_SCREEN, self.Y_MAZE_ON_SCREEN = (1100, 430)
+        self.X_MAZE_ON_SCREEN, self.Y_MAZE_ON_SCREEN = (550, 215)
 
         self.is_shaking: bool = False
 
@@ -113,8 +109,8 @@ class StartGameScreen:
         self.base_path: str = PacManFilesTools.get_base_path_for_images()
         start_game_path: str = self.base_path + "Start_Game" + os.sep
 
-        self.back_ground1, _, _ = self.mlx_obj.mlx_xpm_file_to_image(
-            self.init_ptr, start_game_path + "back_ground1.xpm")
+        self.back_ground1, _, _ = self.mlx_obj.mlx_png_file_to_image(
+            self.init_ptr, start_game_path + "back_ground1.png")
         if not self.back_ground1:
             self.mlx_obj.mlx_release(self.init_ptr)
             raise ValueError(
@@ -122,14 +118,14 @@ class StartGameScreen:
                     "Start_Game_screen.py",
                     "StartGameScreen",
                     "__init__()",
-                    "back_ground1.xpm failed to create",
+                    "back_ground1.png failed to create",
                 )
             )
         self.mlx_obj.mlx_put_image_to_window(self.init_ptr, self.win_ptr,
                                              self.back_ground1, 0, 0)
 
-        self.black_wall_cover, _, _ = self.mlx_obj.mlx_xpm_file_to_image(
-            self.init_ptr, start_game_path + "black_wall_cover.xpm")
+        self.black_wall_cover, _, _ = self.mlx_obj.mlx_png_file_to_image(
+            self.init_ptr, start_game_path + "black_wall_cover.png")
         if not self.black_wall_cover:
             self.mlx_obj.mlx_destroy_image(self.init_ptr, self.back_ground1)
             self.mlx_obj.mlx_release(self.init_ptr)
@@ -138,15 +134,15 @@ class StartGameScreen:
                     "Start_Game_screen.py",
                     "StartGameScreen",
                     "__init__()",
-                    "black_wall_cover.xpm failed to create",
+                    "black_wall_cover.png failed to create",
                 )
             )
         self.mlx_obj.mlx_put_image_to_window(self.init_ptr, self.win_ptr,
                                              self.black_wall_cover,
                                              self.X_MAZE_ON_SCREEN +
-                                             self.x_shaking_offset - 45,
+                                             self.x_shaking_offset - 22,
                                              self.Y_MAZE_ON_SCREEN +
-                                             self.y_shaking_offset - 50,)
+                                             self.y_shaking_offset - 25,)
         self.mlx_obj.mlx_do_sync(self.init_ptr)
 
         self.images: Dict[str, Any] = {}
@@ -184,33 +180,42 @@ class StartGameScreen:
         self.eye_4_motion_offset: int = 0
         self.old_eye_4_pos: Tuple[int, int] = (-10, -10)
 
-        self.increase_player_spd_x_x: Tuple[int, int] = (803, 901)
-        self.increase_player_spd_y_y: Tuple[int, int] = (1733, 1810)
-        self.decrease_player_spd_x_x: Tuple[int, int] = (1124, 1238)
-        self.decrease_player_spd_y_y: Tuple[int, int] = (1745, 1798)
-        self.increase_ghost_spd_x_x: Tuple[int, int] = (762, 839)
-        self.increase_ghost_spd_y_y: Tuple[int, int] = (1905, 1965)
-        self.decrease_ghost_spd_x_x: Tuple[int, int] = (1086, 1179)
-        self.decrease_ghost_spd_y_y: Tuple[int, int] = (1904, 1963)
-        self.go_to_next_level_x_x: Tuple[int, int] = (1559, 2292)
-        self.go_to_next_level_y_y: Tuple[int, int] = (1767, 1822)
-        self.ghost_freeze_x_x: Tuple[int, int] = (1603, 2228)
-        self.ghost_freeze_y_y: Tuple[int, int] = (1907, 1967)
-        self.extra_live_x_x: Tuple[int, int] = (2820, 3389)
-        self.extra_live_y_y: Tuple[int, int] = (1733, 1813)
-        self.unedible_player_x_x: Tuple[int, int] = (2851, 3611)
-        self.unedible_player_y_y: Tuple[int, int] = (1888, 1986)
-        self.pause_game_x_x: Tuple[int, int] = (1820, 1901)
-        self.pause_game_y_y: Tuple[int, int] = (1683, 1756)
-        self.pause_menu_x_x: Tuple[int, int] = (1917, 1990)
-        self.pause_menu_y_y: Tuple[int, int] = (1683, 1756)
-        self.cheat_mode_x_x: Tuple[int, int] = (2010, 2084)
-        self.cheat_mode_y_y: Tuple[int, int] = (1683, 1756)
+        self.increase_player_spd_x_x: Tuple[int, int] = (355, 400)
+        self.increase_player_spd_y_y: Tuple[int, int] = (863, 904)
+        self.decrease_player_spd_x_x: Tuple[int, int] = (539, 579)
+        self.decrease_player_spd_y_y: Tuple[int, int] = (863, 904)
 
-        self.exit_x_x: Tuple[int, int] = (1150, 1922)
-        self.exit_y_y: Tuple[int, int] = (858, 1210)
-        self.resume_x_x: Tuple[int, int] = (1983, 2748)
-        self.resume_y_y: Tuple[int, int] = (858, 1210)
+        self.increase_ghost_spd_x_x: Tuple[int, int] = (338, 380)
+        self.increase_ghost_spd_y_y: Tuple[int, int] = (942, 986)
+        self.decrease_ghost_spd_x_x: Tuple[int, int] = (515, 566)
+        self.decrease_ghost_spd_y_y: Tuple[int, int] = (942, 986)
+
+        self.go_to_next_level_x_x: Tuple[int, int] = (833, 1161)
+        self.go_to_next_level_y_y: Tuple[int, int] = (884, 931)
+
+        self.ghost_freeze_x_x: Tuple[int, int] = (874, 1143)
+        self.ghost_freeze_y_y: Tuple[int, int] = (952, 995)
+
+        self.extra_live_x_x: Tuple[int, int] = (1510, 1750)
+        self.extra_live_y_y: Tuple[int, int] = (870, 913)
+
+        self.unedible_player_x_x: Tuple[int, int] = (1499, 1804)
+        self.unedible_player_y_y: Tuple[int, int] = (947, 1000)
+
+        self.pause_game_x_x: Tuple[int, int] = (910, 950)
+        self.pause_game_y_y: Tuple[int, int] = (841, 878)
+
+        self.pause_menu_x_x: Tuple[int, int] = (958, 995)
+        self.pause_menu_y_y: Tuple[int, int] = (841, 878)
+
+        self.cheat_mode_x_x: Tuple[int, int] = (1005, 1042)
+        self.cheat_mode_y_y: Tuple[int, int] = (841, 878)
+
+        self.exit_x_x: Tuple[int, int] = (575, 961)
+        self.exit_y_y: Tuple[int, int] = (429, 605)
+
+        self.resume_x_x: Tuple[int, int] = (991, 1374)
+        self.resume_y_y: Tuple[int, int] = (429, 605)
 
         self.is_exit: bool = False
         self.pause_game: bool = False
@@ -242,63 +247,63 @@ class StartGameScreen:
         special_chars_path: str = self.base_path + "Special_chars" + os.sep
 
         img_files: Dict[str, str] = {
-            "up": "Up.xpm",
-            "left": "Left.xpm",
-            "down": "Down.xpm",
-            "pause": "pause.xpm",
-            "right": "Right.xpm",
-            "tunnel": "tunnel.xpm",
-            "resume": "resume.xpm",
-            "pacgum": "pac_gum.xpm",
-            "bomb_1": "bomb_on.xpm",
-            "bomb_2": "bomb_off.xpm",
-            "eyes1_1": "eyes1_1.xpm",
-            "eyes1_2": "eyes1_2.xpm",
-            "eyes2_1": "eyes2_1.xpm",
-            "eyes2_2": "eyes2_2.xpm",
-            "eyes3_1": "eyes3_1.xpm",
-            "eyes3_2": "eyes3_2.xpm",
-            "eyes4_1": "eyes4_1.xpm",
-            "eyes4_2": "eyes4_2.xpm",
-            "heart_1": "heart_1.xpm",
-            "heart_2": "heart_2.xpm",
-            "ghost1_1": "ghost1_1.xpm",
-            "ghost1_2": "ghost1_2.xpm",
-            "ghost2_1": "ghost2_1.xpm",
-            "ghost2_2": "ghost2_2.xpm",
-            "ghost3_1": "ghost3_1.xpm",
-            "ghost3_2": "ghost3_2.xpm",
-            "ghost4_1": "ghost4_1.xpm",
-            "ghost4_2": "ghost4_2.xpm",
-            "ghost_42": "ghost_42.xpm",
-            "rocket_2": "rocket_2.xpm",
-            "rocket_1": "rocket_1.xpm",
-            "magnet_1": "magnet_1.xpm",
-            "magnet_2": "magnet_2.xpm",
-            "red_circle": "red_circle.xpm",
-            "hand_cursor": "hand_cursor.xpm",
-            "extra_time_1": "extra_time_1.xpm",
-            "extra_time_2": "extra_time_2.xpm",
-            "back_ground2": "back_ground2.xpm",
-            "super_pacgum": "super_pacgum.xpm",
-            "green_circle": "green_circle.xpm",
-            "pac_man_dr_mo": "pac_man_dr_mo.xpm",
-            "pac_man_dr_mc": "pac_man_dr_mc.xpm",
-            "pac_man_dl_mo": "pac_man_dl_mo.xpm",
-            "pac_man_dl_mc": "pac_man_dl_mc.xpm",
-            "pac_man_du_mo": "pac_man_du_mo.xpm",
-            "pac_man_du_mc": "pac_man_du_mc.xpm",
-            "pac_man_dd_mo": "pac_man_dd_mo.xpm",
-            "pac_man_dd_mc": "pac_man_dd_mc.xpm",
-            "cheat_mode_on": "cheat_mode_on.xpm",
-            "pause_menu_bg": "pause_menu_bg.xpm",
-            "pause_menu_b_on": "pause_menu_on.xpm",
-            "edibl_ghost_1": "edibl_ghost_1.xpm",
-            "edibl_ghost_2": "edibl_ghost_2.xpm",
-            "pause_menu_b_off": "pause_menu_off.xpm",
-            "cheat_mode_b_off": "cheat_mode_off.xpm",
-            "edibl_ghost_v2_1": "edibl_ghost_v2_1.xpm",
-            "edibl_ghost_v2_2": "edibl_ghost_v2_2.xpm",
+            "up": "Up.png",
+            "left": "Left.png",
+            "down": "Down.png",
+            "pause": "pause.png",
+            "right": "Right.png",
+            "tunnel": "tunnel.png",
+            "resume": "resume.png",
+            "pacgum": "pac_gum.png",
+            "bomb_1": "bomb_on.png",
+            "bomb_2": "bomb_off.png",
+            "eyes1_1": "eyes1_1.png",
+            "eyes1_2": "eyes1_2.png",
+            "eyes2_1": "eyes2_1.png",
+            "eyes2_2": "eyes2_2.png",
+            "eyes3_1": "eyes3_1.png",
+            "eyes3_2": "eyes3_2.png",
+            "eyes4_1": "eyes4_1.png",
+            "eyes4_2": "eyes4_2.png",
+            "heart_1": "heart_1.png",
+            "heart_2": "heart_2.png",
+            "ghost1_1": "ghost1_1.png",
+            "ghost1_2": "ghost1_2.png",
+            "ghost2_1": "ghost2_1.png",
+            "ghost2_2": "ghost2_2.png",
+            "ghost3_1": "ghost3_1.png",
+            "ghost3_2": "ghost3_2.png",
+            "ghost4_1": "ghost4_1.png",
+            "ghost4_2": "ghost4_2.png",
+            "ghost_42": "ghost_42.png",
+            "rocket_2": "rocket_2.png",
+            "rocket_1": "rocket_1.png",
+            "magnet_1": "magnet_1.png",
+            "magnet_2": "magnet_2.png",
+            "red_circle": "red_circle.png",
+            "hand_cursor": "hand_cursor.png",
+            "extra_time_1": "extra_time_1.png",
+            "extra_time_2": "extra_time_2.png",
+            "back_ground2": "back_ground2.png",
+            "super_pacgum": "super_pacgum.png",
+            "green_circle": "green_circle.png",
+            "pac_man_dr_mo": "pac_man_dr_mo.png",
+            "pac_man_dr_mc": "pac_man_dr_mc.png",
+            "pac_man_dl_mo": "pac_man_dl_mo.png",
+            "pac_man_dl_mc": "pac_man_dl_mc.png",
+            "pac_man_du_mo": "pac_man_du_mo.png",
+            "pac_man_du_mc": "pac_man_du_mc.png",
+            "pac_man_dd_mo": "pac_man_dd_mo.png",
+            "pac_man_dd_mc": "pac_man_dd_mc.png",
+            "cheat_mode_on": "cheat_mode_on.png",
+            "pause_menu_bg": "pause_menu_bg.png",
+            "pause_menu_b_on": "pause_menu_on.png",
+            "edibl_ghost_1": "edibl_ghost_1.png",
+            "edibl_ghost_2": "edibl_ghost_2.png",
+            "pause_menu_b_off": "pause_menu_off.png",
+            "cheat_mode_b_off": "cheat_mode_off.png",
+            "edibl_ghost_v2_1": "edibl_ghost_v2_1.png",
+            "edibl_ghost_v2_2": "edibl_ghost_v2_2.png",
         }
 
         images_n_p: Dict[str, Any] = {}
@@ -311,7 +316,7 @@ class StartGameScreen:
             else:
                 path = play_path + filename
 
-            img_ptr, _, _ = self.mlx_obj.mlx_xpm_file_to_image(
+            img_ptr, _, _ = self.mlx_obj.mlx_png_file_to_image(
                                                         self.init_ptr, path)
 
             if not img_ptr:
@@ -339,15 +344,15 @@ class StartGameScreen:
 
             if char.isalpha():
                 if char.isupper():
-                    path = alphas_path + char + "_upper.xpm"
+                    path = alphas_path + char + "_upper.png"
                 else:
-                    path = alphas_path + char + "_lower.xpm"
+                    path = alphas_path + char + "_lower.png"
             elif char.isdigit():
-                path = digits_path + char + ".xpm"
+                path = digits_path + char + ".png"
             else:
-                path = special_chars_path + char + ".xpm"
+                path = special_chars_path + char + ".png"
 
-            char_ptr, _, _ = self.mlx_obj.mlx_xpm_file_to_image(
+            char_ptr, _, _ = self.mlx_obj.mlx_png_file_to_image(
                 self.init_ptr, path
             )
 
@@ -362,7 +367,7 @@ class StartGameScreen:
                         "Start_Game_screen.py",
                         "StartGameScreen",
                         "_load_all_imgs()",
-                        f"{char}.xpm not found",
+                        f"{char}.png not found",
                     )
                 )
 
@@ -399,37 +404,38 @@ class StartGameScreen:
 
         for c in word:
             if c == " ":
-                x += 30
+                x += 20
                 continue
 
             self.mlx_obj.mlx_put_image_to_window(
                 self.init_ptr, self.win_ptr, self.images[c], x, y
             )
-            x += 50
+            x += 20
 
     def _put_time_lives_levels_score_on_screen(self) -> None:
         """Put the time, lives, level and score on the screen."""
 
-        self._put_word_in_place(130, 275, "Time")
+        self._put_word_in_place(65, 137, "Time")
         if not self.pause_game:
             self._put_word_in_place(
-                176, 366, str(self.current_game.get_time_left()))
+                88, 183, self._fix_len(str(self.current_game.get_time_left()),
+                                       20))
         else:
             self._put_word_in_place(
-                176, 366, str(self.time_befor_pause))
+                88, 183, str(self.time_befor_pause))
 
-        self._put_word_in_place(3465, 275, "Lives")
+        self._put_word_in_place(1722, 137, "Lives")
         self._put_word_in_place(
-            3567, 366, self._fix_len(str(self.current_game.player.lives), 5)
+            1753, 183, self._fix_len(str(self.current_game.player.lives), 5)
         )
 
-        self._put_word_in_place(80, 1350, "Score")
+        self._put_word_in_place(40, 675, "Score")
         self._put_word_in_place(
-            100, 1450, self._fix_len(str(self.current_game.player.score), 19)
+            50, 725, self._fix_len(str(self.current_game.player.score), 19)
         )
 
-        self._put_word_in_place(3500, 1331, "Level")
-        self._put_word_in_place(3590, 1400, str(self.current_game.level))
+        self._put_word_in_place(1740, 665, "Level")
+        self._put_word_in_place(1775, 730, str(self.current_game.level))
 
     def _put_game_buttons_in_place(self) -> None:
         """Put the game information and the cheat buttons on the screen."""
@@ -437,35 +443,37 @@ class StartGameScreen:
         self._put_time_lives_levels_score_on_screen()
 
         if self.is_cheat_mode:
-            self._put_word_in_place(117, 1748, "Player Speed:  +   OR   -")
-            self._put_word_in_place(117, 1911, "Ghost Speed:  +   OR   -")
-            self._put_word_in_place(1540, 1778, "Go To Next Level")
-            self._put_word_in_place(1605, 1911, "Ghost Freeze")
-            self._put_word_in_place(2820, 1748, "Extra lives")
+            self._put_word_in_place(58, 874, "Player Speed:  +   OR   -")
+            self._put_word_in_place(58, 955, "Ghost Speed:  +   OR   -")
+#
+            self._put_word_in_place(830, 889, "Go To Next Level")
+            self._put_word_in_place(880, 955, "Ghost Freeze")
+            self._put_word_in_place(1510, 874, "Extra lives")
 
             if not self.current_game.player.invincible:
                 self.mlx_obj.mlx_put_image_to_window(
                     self.init_ptr,
                     self.win_ptr,
                     self.images["green_circle"],
-                    2790,
-                    1911,
+                    1495,
+                    955,
                 )
             else:
                 self.mlx_obj.mlx_put_image_to_window(
                     self.init_ptr,
                     self.win_ptr,
                     self.images["red_circle"],
-                    2790,
-                    1911,
+                    1495,
+                    955,
                 )
-            self._put_word_in_place(2850, 1911, "Edible Player")
+            self._put_word_in_place(1525, 955, "Edible Player")
 
         pause_img: str = (
             "resume" if self.pause_game else "pause")
+
         self.mlx_obj.mlx_put_image_to_window(
             self.init_ptr, self.win_ptr, self.images[pause_img],
-            1820, 1671
+            910, 835
         )
 
         pause_menu_img: str = (
@@ -473,13 +481,14 @@ class StartGameScreen:
         )
         self.mlx_obj.mlx_put_image_to_window(
             self.init_ptr, self.win_ptr, self.images[pause_menu_img],
-            1910, 1671
+            955, 835
         )
+
         cheat_mode_img: str = (
             "cheat_mode_on" if self.is_cheat_mode else "cheat_mode_b_off")
         self.mlx_obj.mlx_put_image_to_window(
             self.init_ptr, self.win_ptr, self.images[cheat_mode_img],
-            2000, 1671
+            1000, 835
         )
 
     def _go_to_next_level(self) -> None:
@@ -530,8 +539,8 @@ class StartGameScreen:
             self.init_ptr,
             self.win_ptr,
             self.images["black_wall_cover"],
-            self.X_MAZE_ON_SCREEN + self.x_shaking_offset - 45,
-            self.Y_MAZE_ON_SCREEN + self.y_shaking_offset - 50,
+            self.X_MAZE_ON_SCREEN + self.x_shaking_offset - 22,
+            self.Y_MAZE_ON_SCREEN + self.y_shaking_offset - 25,
         )
 
     def _on_each_level(self) -> None:
@@ -568,7 +577,7 @@ class StartGameScreen:
         elif direction == Direction.RIGHT:
             self.old_pacman_imag = "pac_man_dr_mo"
 
-        mouth: str = "mo" if self.player_motion_offset < 45 else "mc"
+        mouth: str = "mo" if self.player_motion_offset < 22 else "mc"
         self._put_image_in_maze_place(
             x, y, self.old_pacman_imag[:-2] + mouth)
 
@@ -590,6 +599,7 @@ class StartGameScreen:
         motion_my: int = my
         motion_mx: int = mx
         sound_obj: Sounds = self.current_game.sounds_obj
+
         if character == Character.PAC_MAN:
             direction: Direction = \
                 self.current_game.player.direction
@@ -1132,7 +1142,7 @@ class StartGameScreen:
                 if X_Y_Tools.is_x_in_range_xx_and_y_in_range_yy(x, y, xx, yy):
                     self.mlx_obj.mlx_put_image_to_window(
                         self.init_ptr, self.win_ptr,
-                        self.images["hand_cursor"], x - 15, y)
+                        self.images["hand_cursor"], x - 7, y)
                     break
 
         if self.is_cheat_mode and self.is_pause_menu is False\
@@ -1141,7 +1151,7 @@ class StartGameScreen:
                 if X_Y_Tools.is_x_in_range_xx_and_y_in_range_yy(x, y, xx, yy):
                     self.mlx_obj.mlx_put_image_to_window(
                         self.init_ptr, self.win_ptr,
-                        self.images["hand_cursor"], x - 15, y)
+                        self.images["hand_cursor"], x - 7, y)
                     return
 
         if self.is_pause_menu:
@@ -1149,7 +1159,7 @@ class StartGameScreen:
                 if X_Y_Tools.is_x_in_range_xx_and_y_in_range_yy(x, y, xx, yy):
                     self.mlx_obj.mlx_put_image_to_window(
                         self.init_ptr, self.win_ptr,
-                        self.images["hand_cursor"], x - 15, y)
+                        self.images["hand_cursor"], x - 7, y)
                     return
 
     def _pause_game_or_unpause(self) -> None:
@@ -1180,7 +1190,7 @@ class StartGameScreen:
         if self.is_pause_menu:
             self.mlx_obj.mlx_put_image_to_window(
                 self.init_ptr, self.win_ptr, self.images["pause_menu_bg"],
-                self.X_MAZE_ON_SCREEN + self.x_shaking_offset - 40,
+                self.X_MAZE_ON_SCREEN + self.x_shaking_offset - 22,
                 self.Y_MAZE_ON_SCREEN + self.y_shaking_offset - 25)
 
     def _game_loop(self, just_for_mlx: Any) -> None:
@@ -1215,6 +1225,10 @@ class StartGameScreen:
             self.current_game.sounds_obj.play_movement_sound()
             self.current_game.update(direction=self.plr_next_direction)
             self._check_game_status()
+
+
+
+        # print(self.player_motion_offset)
 
     def show_game_play_screen(self) -> None:
         """Create and show the game play screen.
@@ -1394,12 +1408,15 @@ class StartGameScreen:
                 )
             )
 
-        if self.show_game_over_screen:
-            EnterScoreNameScreen(
-                self.current_game.player.score
-            ).show_enter_score_name_screen(is_win=False)
+        # if self.show_game_over_screen:
+        #     EnterScoreNameScreen(
+        #         self.current_game.player.score
+        #     ).show_enter_score_name_screen(is_win=False)
 
-        else:
-            EnterScoreNameScreen(
-                self.current_game.player.score
-            ).show_enter_score_name_screen(is_win=True)
+        # else:
+        #     EnterScoreNameScreen(
+        #         self.current_game.player.score
+        #     ).show_enter_score_name_screen(is_win=True)
+
+
+StartGameScreen(1).show_game_play_screen()

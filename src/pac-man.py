@@ -26,7 +26,7 @@ def main() -> None:
         sound.init_sounds()
 
         screen: int = E_MainMenuOptions.MAIN_MENU_SCREEN
-        LEVELS: int = 10
+        LEVELS: int = 1
 
         while screen != E_MainMenuOptions.EXIT:
 
