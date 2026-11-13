@@ -92,14 +92,14 @@ class Game:
             self.check_pacgum_eating(cell)
             self.player.player_count = 0
 
-        if self.player.player_count >= 90:
+        if self.player.player_count >= 45:
             self.player.is_counting = False
 
             if self.player.direction:
                 self.player.move(self.maze, self.player.direction)
                 self.player.in_tunnel = False
 
-            self.player.player_count -= 90
+            self.player.player_count -= 45
 
             cell = self.maze.grid[self.player.y][self.player.x]
             self.check_booster()
@@ -127,7 +127,7 @@ class Game:
 
             ghost.ghost_count += ghost.ghost_speed
 
-            if ghost.ghost_count >= 90:
+            if ghost.ghost_count >= 45:
 
                 ghost.check_edible_time()
 
@@ -138,13 +138,13 @@ class Game:
                     ghost.move(self.maze, self.player)
 
                 self.check_ghost_position(ghost)
-                ghost.ghost_count -= 90
+                ghost.ghost_count -= 45
 
         for eyes in self.eyess:
             eyes.counter += eyes.speed
-            if eyes.counter >= 90:
+            if eyes.counter >= 45:
                 eyes.move_eyes(self.maze)
-                eyes.counter -= 90
+                eyes.counter -= 45
 
     def check_ghost_position(self, ghost: Ghost) -> None:
         """
@@ -282,15 +282,15 @@ class Game:
 
         if player_speed:
             speed: int = max(1,
-                             min(90, self.player.player_speed + player_speed))
+                             min(45, self.player.player_speed + player_speed))
             self.player.player_speed = speed
 
         if ghost_speed:
             for ghost in self.ghosts:
-                minimum_speed: int = min(90, ghost.ghost_speed + ghost_speed)
+                minimum_speed: int = min(45, ghost.ghost_speed + ghost_speed)
                 ghost.ghost_speed = max(1, minimum_speed)
 
-                min_speed: int = min(90, ghost.tmp_ghost_speed + ghost_speed)
+                min_speed: int = min(45, ghost.tmp_ghost_speed + ghost_speed)
                 ghost.tmp_ghost_speed = max(1, min_speed)
 
     def transfer_player_state(self, next_game: "Game") -> None:
@@ -511,8 +511,8 @@ class Create_Levels:
             pacman: PacManFilesTools = PacManFilesTools()
             games: List = []
             counter: int = 0
-            s_ghost: int = 3
-            s_player: int = 3
+            s_ghost: int = 2
+            s_player: int = 2
 
             for lvl in range(1, levels + 1):
                 data: Dict[str, Dict] = pacman.get_current_level_data()

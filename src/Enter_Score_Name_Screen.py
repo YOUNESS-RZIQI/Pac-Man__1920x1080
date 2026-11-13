@@ -168,13 +168,13 @@ class EnterScoreNameScreen:
 
         for c in word:
             if c == " ":
-                x += 30
+                x += 20
                 continue
 
             self.mlx_obj.mlx_put_image_to_window(
                 self.init_ptr, self.win_ptr, self.images[c], x, y
             )
-            x += 60
+            x += 40
 
     def get_char(self, keycode: int) -> str:
         """Convert a keycode into its character.
@@ -271,22 +271,22 @@ class EnterScoreNameScreen:
 
             if is_win:
                 self.mlx_obj.mlx_put_image_to_window(
-                    self.init_ptr, self.win_ptr, self.images["win_game"], 0, 0
+                    self.init_ptr, self.win_ptr, self.images["win_game"], 0, -50
                 )
             else:
                 self.mlx_obj.mlx_put_image_to_window(
-                    self.init_ptr, self.win_ptr, self.images["game_over"], 0, 0
+                    self.init_ptr, self.win_ptr, self.images["game_over"], 0, -50
                 )
 
             if is_win:
-                self.put_word_in_place(850, 1010, self.score_name)
+                self.put_word_in_place(920, 960, self.score_name)
                 self.put_word_in_place(
-                    670, 895, self._fix_score(str(self.score))
+                    670, 845, self._fix_score(str(self.score))
                 )
             else:
-                self.put_word_in_place(860, 1000, self.score_name)
+                self.put_word_in_place(900, 955, self.score_name)
                 self.put_word_in_place(
-                    670, 880, self._fix_score(str(self.score))
+                    670, 828, self._fix_score(str(self.score))
                 )
 
         def exit_loop(self: EnterScoreNameScreen) -> None:
@@ -300,19 +300,19 @@ class EnterScoreNameScreen:
 
         if is_win:
             self.mlx_obj.mlx_put_image_to_window(
-                self.init_ptr, self.win_ptr, self.images["win_game"], 0, 0
+                self.init_ptr, self.win_ptr, self.images["win_game"], 0, -50
             )
             self.sounds.win_or_loss_sound("win")
         else:
             self.mlx_obj.mlx_put_image_to_window(
-                self.init_ptr, self.win_ptr, self.images["game_over"], 0, 0
+                self.init_ptr, self.win_ptr, self.images["game_over"], 0, -50
             )
             self.sounds.win_or_loss_sound("over")
 
         if is_win:
-            self.put_word_in_place(670, 895, self._fix_score(str(self.score)))
+            self.put_word_in_place(670, 845, self._fix_score(str(self.score)))
         else:
-            self.put_word_in_place(670, 880, self._fix_score(str(self.score)))
+            self.put_word_in_place(670, 828, self._fix_score(str(self.score)))
 
         self.mlx_obj.mlx_key_hook(self.win_ptr, key_hook, self)
         self.mlx_obj.mlx_hook(self.win_ptr, 33, 0, exit_loop, self)

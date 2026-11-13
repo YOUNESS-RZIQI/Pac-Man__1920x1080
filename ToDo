@@ -7,54 +7,13 @@ Done:
 5) videos.py
 
 
+6) intro in the medle and next to wall corner
+7) fixe the enter score name images and text places
+8) decreas speed
+
+
 
 
 ToDo:
 
-1) fixe the animation problem in : start game
-                                                    3
-                                                    6
-                                                    9
-                                                    12
-                                                    15
-                                                    18
-                                                    21
-                                                    24
-                                                    27
-                                                    30
-                                                    33
-                                                    36
-                                                    39
-                                                    42
-                                                    44
-                                                    44
-                                                    .
-                                                    .
-                                                    .
-                                                    44
 
-2) fixe the enter score name images and text places
-
-
-
-
-
-
-
-
-        #
-
-        def click(button: int, x: int, y: int, nun) -> None:
-            """Select the option whose button was clicked.
-
-            Only the left mouse button is handled.
-
-            Args:
-                button: The number of the mouse button.
-                x: The x position of the click.
-                y: The y position of the click.
-                self: The MainMenuScreen instance.
-            """
-            print(x, y)
-
-        self.mlx_obj.mlx_mouse_hook(self.win_ptr, click, self)

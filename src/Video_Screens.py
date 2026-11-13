@@ -133,12 +133,12 @@ class VideoScreen:
 
                 elif "/black_wall.png" in self.images_paths[self.index]:
                     self.mlx_obj.mlx_put_image_to_window(
-                        self.init_ptr, self.win_ptr, img_ptr, 463, 250
+                        self.init_ptr, self.win_ptr, img_ptr, 543, 180
                     )
 
                 elif "/intro2/" in self.images_paths[self.index]:
                     self.mlx_obj.mlx_put_image_to_window(
-                        self.init_ptr, self.win_ptr, img_ptr, 488, 275
+                        self.init_ptr, self.win_ptr, img_ptr, 568, 205
                     )
 
                 self.mlx_obj.mlx_destroy_image(self.init_ptr, img_ptr)

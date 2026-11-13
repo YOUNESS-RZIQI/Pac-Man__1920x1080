@@ -456,7 +456,7 @@ class StartGameScreen:
                     self.win_ptr,
                     self.images["green_circle"],
                     1495,
-                    955,
+                    962,
                 )
             else:
                 self.mlx_obj.mlx_put_image_to_window(
@@ -464,7 +464,7 @@ class StartGameScreen:
                     self.win_ptr,
                     self.images["red_circle"],
                     1495,
-                    955,
+                    962,
                 )
             self._put_word_in_place(1525, 955, "Edible Player")
 
@@ -1226,10 +1226,6 @@ class StartGameScreen:
             self.current_game.update(direction=self.plr_next_direction)
             self._check_game_status()
 
-
-
-        # print(self.player_motion_offset)
-
     def show_game_play_screen(self) -> None:
         """Create and show the game play screen.
 
@@ -1408,15 +1404,12 @@ class StartGameScreen:
                 )
             )
 
-        # if self.show_game_over_screen:
-        #     EnterScoreNameScreen(
-        #         self.current_game.player.score
-        #     ).show_enter_score_name_screen(is_win=False)
+        if self.show_game_over_screen:
+            EnterScoreNameScreen(
+                self.current_game.player.score
+            ).show_enter_score_name_screen(is_win=False)
 
-        # else:
-        #     EnterScoreNameScreen(
-        #         self.current_game.player.score
-        #     ).show_enter_score_name_screen(is_win=True)
-
-
-StartGameScreen(1).show_game_play_screen()
+        else:
+            EnterScoreNameScreen(
+                self.current_game.player.score
+            ).show_enter_score_name_screen(is_win=True)
